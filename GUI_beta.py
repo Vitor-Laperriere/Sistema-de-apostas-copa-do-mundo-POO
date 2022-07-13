@@ -1,5 +1,10 @@
 from PySimpleGUI import PySimpleGUI as sg
 import os
+#from utils import * 
+#from utils.music_utilities import get_files_inside_directory_not_recursive, play_sound, is_sound_playing, pause_sounds, stop_sounds, unpause
+#from playsound import playsound
+
+from pygame import mixer
 cwd = os.getcwd()
 sg.theme('DarkRed')
 
@@ -80,14 +85,17 @@ def janela_jogo(grupo):
 
 def janela_time():
 
+	mixer.init()
+
+	mixer.music.load('brasilsil.mp3')
 
 	layout = [
 
-		[sg.Image(filename='fotos_selecoes/fot25.png')],
+		[sg.Image(filename='fotos_selecoes/fot25.png',size=(300,300))],
 		[sg.Text('O Brasil garantiu a sua vaga na Copa do Mundo de 2022 em 11 de novembro de 2021, mais de um ano antes do início do Mundial.\n'+
 		'Com campanha praticamente perfeita nas Eliminatórias Sul-Americanas, a equipe de Tite pode até não ter encantado em muitos momentos,\n'+ 
 		'mas sobrou na América do Sul com uma defesa aparentemente intransponível, um sistema de jogo sólido e Neymar chamando a responsabilidade no ataque.\n'+
-		'O Brasil está no grupo G com Suíça, Sérvia e Camarões.')],
+		'O Brasil está no grupo G com Suíça, Sérvia e Camarões.'),sg.Button('Play >',key='play'),sg.Button('Pause ||',key='pause')],
 		[sg.Button('Voltar',key='voltar4')]
 	]
 
@@ -97,6 +105,8 @@ def janela_time():
 janela1, janela2,janela3,janela4,janela5 = janela_login(),None,None,None,None
 
 grupo = '1'
+
+musica_pausada = 0
 
 #stadium = [1,3,]
 
@@ -150,3 +160,16 @@ while True:
 		if event == 'time':
 			janela3.hide()
 			janela4 = janela_time()
+
+	if window == janela4 and event == 'play' or event == 'pause':
+
+		if event == 'play':
+			mixer.music.play()
+		
+		elif event == 'pause' and musica_pausada == 0:
+			musica_pausada = 1
+			mixer.music.pause()
+
+		else:
+			 mixer.music.unpause()
+			 musica_pausada = 0
