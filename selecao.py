@@ -1,4 +1,6 @@
 import PySimpleGUI as sg
+import os
+import random
 
 class selecao:
 
@@ -9,7 +11,7 @@ class selecao:
 
         print(linhas)
 
-        self.país = linhas[0].split(' ')[1]
+        self.país = ' '.join(linhas[0].split(' ')[1:])
             
         self.jogadores = []
 
@@ -28,14 +30,18 @@ class selecao:
         linha1 = [sg.Text(self.país)]
         linha2 = [sg.Text('Elenco:')]
         linha3 = [sg.Column([[sg.Text(jogador)] for jogador in self.jogadores], scrollable = True, vertical_scroll_only = True)]
-        linha4 = [sg.Text(self.texto)]
+        linha4 = [sg.Text(self.texto, size = (60, None))]
         gui = [linha1, linha2, linha3, linha4]
 
         return gui
 
 
 if __name__ == '__main__':
-    layout = selecao('arquivos/Alemanha.txt').get_gui()
+    arquivos = os.listdir('./arquivos')
+    layout1 = selecao(f'./arquivos/{random.choice(arquivos)}').get_gui()
+    layout2 = selecao(f'./arquivos/{random.choice(arquivos)}').get_gui()
+
+    layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
 
     window = sg.Window('Teste', layout)
 
