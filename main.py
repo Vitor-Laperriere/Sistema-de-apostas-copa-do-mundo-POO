@@ -182,13 +182,15 @@ class Estadio:
 	#khalifa 6
 	# lusail 7
 
-	self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
-		'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
+	def __init__(self):
+		
+		self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
+			'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
 
-	                             #A          #B          #C          #D
-	self.stadium_per_game = [1,3,3,6,6,1,6,4,4,1,4,3,0,7,5,7,0,7,2,5,2,0,2,5,
-		3,6,4,1,6,1, 4,1,3,6,4,3, 7,2,2,0,0,7 ,5,0,5,7,2,5]
-		#E          #F            #G           #H
+		                             #A          #B          #C          #D
+		self.stadium_per_game = [1,3,3,6,6,1,6,4,4,1,4,3,0,7,5,7,0,7,2,5,2,0,2,5,
+			3,6,4,1,6,1, 4,1,3,6,4,3, 7,2,2,0,0,7 ,5,0,5,7,2,5]
+			#E          #F            #G           #H
 
 	def get_StadiumFile(id_do_jogo):
 
