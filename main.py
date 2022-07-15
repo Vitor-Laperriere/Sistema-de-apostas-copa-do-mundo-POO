@@ -58,12 +58,12 @@ class Janela:
 	def janela_login(self):
 
 		layout = [
-		[sg.Text('User'),sg.Input(key='user',size= (20,1))],
-		[sg.Text('Senha'),sg.Input(key='senha',password_char='*',size=(20,1))],
+		[sg.Text('Usuário'),sg.Input(key='user',size= (20,1))],
+		[sg.Text('Senha  '),sg.Input(key='senha',password_char='*',size=(20,1))],
 		[sg.Button('Entrar',font='Verdana 14 italic bold underline')]
 		]
 
-		return sg.Window('Login',layout=layout,finalize=True,font='Verdana 14 italic bold')
+		return sg.Window('Login',layout=layout,finalize=True,font='Verdana 14 italic bold', element_justification='c')
 
 	def janela_tabela(self):
 
