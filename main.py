@@ -46,7 +46,7 @@ class Estadios:
 		#read_text_from_file = file.read()
 
 		layout = [
-			[sg.Image('estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
+			[sg.Image('fotos/estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
 			#[sg.Text(read_text_from_file)]
 			[sg.Button('Voltar',key='voltar5')]
 		]
@@ -69,7 +69,7 @@ class Janela:
 	def janela_tabela(self):
 
 		layout = [
-		[sg.Image(filename="grupos2.png",size=(1280,620))],
+		[sg.Image(filename="./fotos/grupos.png",size=(1280,620))],
 		[sg.Button('Grupo A',key='1',size=(11,3)),sg.Button('Grupo B',key='2',size=(11,3)),sg.Button('Grupo C',key='3',size=(11,3)),
 		sg.Button('Grupo D',key='4',size=(11,3)),
 		sg.Button('Grupo E',key='5',size=(11,3)),sg.Button('Grupo F',key='6',size=(11,3)),sg.Button('Grupo G',key='7',size=(11,3)),sg.Button('Grupo H',key='8',size=(11,3))],
@@ -81,7 +81,7 @@ class Janela:
 	def janela_jogo(self,grupo):
 		
 		cwd = os.getcwd()
-		image = cwd + '/bandeiras/grupo'
+		image = cwd + '/fotos/bandeiras/grupo'
 
 		vals = [['1','2','3','4'],['1','3','4','2'],['2','3','4','1']]
 		aposta = [['0','0','1','1'],['2','2','3','3'],['4','4','5','5']]
@@ -129,9 +129,9 @@ class Janela:
 
 		#mixer.init()
 		#mixer.music.load('hinos/grupo' + grupo + '/' + 'hino' + event[4])  # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome hino<i>.mp3 com i de 0 a 3
-		nome_arquivo = f'./texto_selecoes/grupo{grupo}/text{event[4]}.txt'
+		nome_arquivo = f'./textos/selecoes/grupo{grupo}/text{event[4]}.txt'
 		layout_info = Selecao(nome_arquivo).GUI()
-		layout = [[sg.Image(f'./fotos_selecoes/grupo{grupo}/fot{event[4]}.png'), sg.Column(layout_info, vertical_alignment = 'top')]]
+		layout = [[sg.Image(f'./fotos/selecoes/grupo{grupo}/fot{event[4]}.png'), sg.Column(layout_info, vertical_alignment = 'top')]]
 
 		return sg.Window('Seleção', layout = layout, finalize = True)
 
@@ -151,7 +151,7 @@ class Janela:
 
 		vals = [[0,1,2,3],[0,2,3,1],[1,2,3,0]]
 
-		file = open('selecoes.txt','r')
+		file = open('./textos/selecoes.txt','r')
 
 		num_do_jogo = int(0)
 		for grupo in range (8):
