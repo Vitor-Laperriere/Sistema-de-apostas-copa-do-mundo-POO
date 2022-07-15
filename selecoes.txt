@@ -1,8 +1,0 @@
-Qatar,Equador,Senegal,Holanda
-Inglaterra,Irã,Estados Unidos,País-de-Gales
-Argentina,Arábia Saudita,México,Polônia
-França,Austrália,Dinamarca,Tunísia
-Espanha,Costa Rica,Alemanha,Japão
-Bélgica,Canadá,Marrocos,Croácia
-Brasil,Sérvia,Suíça,Camarões
-Portugal,Gana,Uruguai,Coreia do Sul  
