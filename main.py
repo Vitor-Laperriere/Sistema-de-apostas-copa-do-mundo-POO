@@ -26,7 +26,7 @@ class Janela:
 	def janela_tabela(self):
 
 		layout = [
-			[sg.Image(filename="./fotos/grupos.png",size=(1280,720))],
+			[sg.Image(filename="./fotos/grupos.png",size=(1280,650))],
 			[sg.Button('Grupo A', key='1', size=(11,3)),
 			sg.Button('Grupo B', key='2', size=(11,3)),
 			sg.Button('Grupo C', key='3', size=(11,3)),
@@ -95,7 +95,7 @@ class Janela:
 
 		return sg.Window('Seleção', layout = layout, finalize = True)
 
-	def escreve_recibo(self):
+	def escreve_recibo(self, usuario):
 
 		# save FPDF() class into
 		# a variable pdf
@@ -108,14 +108,13 @@ class Janela:
 		# that you want in the pdf
 		pdf.set_font("Arial", size = 15)
 
-
 		vals = [[0,1,2,3],[0,2,3,1],[1,2,3,0]]
 
 		file = open('./textos/selecoes.txt','r')
 
 		num_do_jogo = int(0)
 		for grupo in range (8):
-			x = '-------------------- Grupo ' + str(grupo + 1) + '--------------------'
+			x = 20 * '-' + ' Grupo ' + str(grupo + 1) + ' ' + 20 * '-'
 			pdf.cell(200, 10, txt = x, ln = 1, align = 'C')
 			linha = file.readline()
 			selecoes = linha.split(',')
@@ -133,16 +132,16 @@ class Janela:
 				num_do_jogo += 1
 
 
-		x = '----------------------------------------'
+		x = 40 * "-"
 		pdf.cell(0, 10, txt = x, ln = 1, align = 'C') 
 
-		x = nome_usuario
+		x = usuario.nome
 		pdf.cell(0, 10, txt = x, ln = 0, align = 'L')
-		x = 'R$' + str(saldo_usuario)
+		x = 'R$' + str(usuario.saldo)
 		pdf.cell(0, 10, txt = x, ln = 0, align = 'R')
 
 
-		pdf.output(nome_usuario + ".pdf")
+		pdf.output(usuario.nome + ".pdf")
 
 
 		return
@@ -150,9 +149,9 @@ class Janela:
 
 if __name__ == '__main__':
 
-	j = Janela()
+	J = Janela()
 	janela = 5 * [None]
-	janela[0] = j.janela_login()
+	janela[0] = J.janela_login()
 
 	grupo = '1'
 	game_bets = 48 * [0]
@@ -189,11 +188,12 @@ if __name__ == '__main__':
 
 			usuario.nome = str(values['user'])
 			usuario.senha = str(values['senha'])
+			usuario.saldo = 0
 
 			if event == 'Entrar' and sistema.login_valido(usuario.nome, usuario.senha):
 				
 				janela[0].hide()
-				janela[1] = j.janela_tabela()
+				janela[1] = J.janela_tabela()
 			
 			elif event == 'Registrar':
 				
@@ -204,7 +204,7 @@ if __name__ == '__main__':
 		if window == janela[1] and event != 'voltar2':
 			janela[1].hide()
 			grupo = event
-			janela[2] = j.janela_jogo(grupo)
+			janela[2] = J.janela_jogo(grupo)
 			
 
 		if window == janela[2] and event == 'apostar' or 'time' in event or 'estadio' in event:
@@ -223,11 +223,13 @@ if __name__ == '__main__':
 						else:
 							break
 
+			J.escreve_recibo(usuario)
+
 
 			if 'time' in event:
 
 				janela[2].hide()
-				janela[3] = j.janela_selecao(grupo,event)
+				janela[3] = J.janela_selecao(grupo,event)
 
 			if 'estadio1' in event:
 				if event[8] == '0':
@@ -239,7 +241,7 @@ if __name__ == '__main__':
 
 				print(num_do_jogo)
 				janela[2].hide()
-				janela[4] = j.janela_estadio(num_do_jogo)
+				janela[4] = J.janela_estadio(num_do_jogo)
 
 			if 'estadio2' in event:
 				if event[8] == '0':
@@ -251,11 +253,9 @@ if __name__ == '__main__':
 
 				print(num_do_jogo)
 				janela[2].hide()
-				janela[4] = j.janela_estadio(num_do_jogo)
+				janela[4] = J.janela_estadio(num_do_jogo)
 
 
 		if window == janela[4] and event == 'voltar5':
 			janela[4].hide()
 			janela[2].un_hide()
-
-	#j.escreve_recibo()
