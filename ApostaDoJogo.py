@@ -21,7 +21,3 @@ class ApostaDoJogo(self):
 		self.palpite_sel_1 = -1
 		self.palpite_sel_2 = -1
 		self.dinheiro_apostado = -1
-
-
-
-

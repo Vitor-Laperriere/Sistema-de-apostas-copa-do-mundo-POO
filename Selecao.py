@@ -2,17 +2,14 @@ import PySimpleGUI as sg
 import os
 import random
 
-class selecao:
+class Selecao:
 
     def __init__(self, nome_arquivo):
+
         linhas = open(nome_arquivo, 'r').readlines()
-        
         linhas = [linha[:-1] for linha in linhas]
 
-        print(linhas)
-
-        self.país = ' '.join(linhas[0].split(' ')[1:])
-            
+        self.pais = ' '.join(linhas[0].split(' ')[1:])
         self.jogadores = []
 
         i = 2
@@ -26,8 +23,9 @@ class selecao:
         while i < len(linhas):
             self.texto += linhas[i]
     
-    def get_gui(self):
-        linha1 = [sg.Text(self.país)]
+    def GUI(self):
+
+        linha1 = [sg.Text(self.pais)]
         linha2 = [sg.Text('Elenco:')]
         linha3 = [sg.Column([[sg.Text(jogador)] for jogador in self.jogadores], scrollable = True, vertical_scroll_only = True)]
         linha4 = [sg.Text(self.texto, size = (60, None))]
@@ -37,11 +35,16 @@ class selecao:
 
 
 if __name__ == '__main__':
-    arquivos = os.listdir('./arquivos')
-    layout1 = selecao(f'./arquivos/{random.choice(arquivos)}').get_gui()
-    layout2 = selecao(f'./arquivos/{random.choice(arquivos)}').get_gui()
+    arquivos = os.listdir('./texto_selecoes')
 
-    layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
+    layout1 = selecao(f'./texto_selecoes/grupo7/text1.txt').GUI()
+    #layout2 = selecao(f'./texto_selecoes/grupo7/text2.txt').GUI()
+    #layout1 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
+    #layout2 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
+
+    layout = [[sg.Image(f'./fotos_selecoes/grupo7/fot2.png'), sg.Column(layout1, vertical_alignment = 'top')]]
+    #layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
+
 
     window = sg.Window('Teste', layout)
 
