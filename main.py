@@ -7,6 +7,52 @@ from fpdf import FPDF
 cwd = os.getcwd()
 sg.theme('DarkRed')
 
+class Estadios:
+
+	# 974 			0
+	# albait 		1
+	#aljanoub 		2
+	#althumama 		3
+	#binali 		4
+	# education 	5
+	#khalifa 		6
+	# lusail 		7
+
+	def __init__(self):
+		
+		self.arquivo_do_estadio = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
+			'althumama.png','binali.png','education.png','khalifa.png', 'lusail.png']
+
+		self.estadio_do_jogo = [
+			1,3,3,6,6,1,	#	Grupo A
+			6,4,4,1,4,3,	#	Grupo B
+			0,7,5,7,0,7,	#	Grupo C
+			2,5,2,0,2,5,	#	Grupo D
+			3,6,4,1,6,1,	#	Grupo E
+			4,1,3,6,4,3,	#	Grupo F
+			7,2,2,0,0,7,	#	Grupo G
+			5,0,5,7,2,5 	#	Grupo H
+		]
+
+	def acessar_arquivo_do_estadio(self, id_do_jogo):
+
+		return self.arquivo_do_estadio[self.estadio_do_jogo[id_do_jogo]]
+
+	def GUI(self, id_do_jogo):
+
+		#id_do_estadio = self.estadio_do_jogo[num_do_jogo]
+		#file = open('texto_estadios/' + 'estadio' + str(id_do_estadio) , 'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
+		#read_text_from_file = file.read()
+
+		layout = [
+			[sg.Image('estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
+			#[sg.Text(read_text_from_file)]
+			[sg.Button('Voltar',key='voltar5')]
+		]
+
+		return sg.Window('Estádio' + self.acessar_arquivo_do_estadio(id_do_jogo) ,layout = layout,finalize = True)
+
+
 class Janela:
 
 	def janela_login(self):
@@ -22,7 +68,7 @@ class Janela:
 	def janela_tabela(self):
 
 		layout = [
-		[sg.Image(filename="grupos2.png",size=(1280,720))],
+		[sg.Image(filename="grupos2.png",size=(1280,620))],
 		[sg.Button('Grupo A',key='1',size=(11,3)),sg.Button('Grupo B',key='2',size=(11,3)),sg.Button('Grupo C',key='3',size=(11,3)),
 		sg.Button('Grupo D',key='4',size=(11,3)),
 		sg.Button('Grupo E',key='5',size=(11,3)),sg.Button('Grupo F',key='6',size=(11,3)),sg.Button('Grupo G',key='7',size=(11,3)),sg.Button('Grupo H',key='8',size=(11,3))],
@@ -72,24 +118,11 @@ class Janela:
 		return sg.Window('Jogos do Grupo ' + grupo ,layout = layout,finalize = True)
 
 
-	def janela_estadio(self, id_do_jogo, estadio):
+	def janela_estadio(self, id_do_jogo):
 
-		estadio_requerido = estadio.stadium_per_game[num_do_jogo]
-
-		file = open('texto_estadios/' + 'estadio' + str(estadio_requerido) , 'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
-
-		read_text_from_file = file.read()
-
-		layout = [
-
-			[sg.Image('estadios/'+ estadio.get_StadiumFile(id_do_jogo))],
-			[sg.Text(read_text_from_file)]
-			[sg.Button('Voltar',key='voltar5')]
-
-		]
-
-		return sg.Window('Estádio' + estadio.get_StadiumFile(id_do_jogo) ,layout = layout,finalize = True)
-
+		self.estagio = Estadios()
+		print("ID_DO_JOGO = ", id_do_jogo)
+		return self.estagio.GUI(id_do_jogo);
 
 	def janela_time(self,grupo,event):
 
@@ -162,48 +195,12 @@ class Janela:
 
 		return
 
-class Estadio:
-
-	# 974 0
-	# albait 1
-	#aljanoub 2
-	#althumama 3
-	#binali 4
-	# education 5
-	#khalifa 6
-	# lusail 7
-
-	def __init__(self):
-		
-		self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
-			'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
-
-		self.stadium_per_game = [
-			1,3,3,6,6,1,	#A
-			6,4,4,1,4,3,	#B
-			0,7,5,7,0,7,	#C
-			2,5,2,0,2,5,	#D
-			3,6,4,1,6,1,	#E
-			4,1,3,6,4,3,	#F
-			7,2,2,0,0,7,	#G
-			5,0,5,7,2,5]	#H
-
-	def get_StadiumFile(id_do_jogo):
-
-		return self.stadium_files[self.stadium_per_game[id_do_jogo]]
-
-
 
 j = Janela()
 janela = [None]*5
 janela[0] = j.janela_login()
 
-estadio = Estadio()
-
-
 grupo = '1'
-
-
 game_bets = [0]*48
 
 for i in range(0,48):
@@ -282,7 +279,7 @@ while True:
 
 			print(num_do_jogo)
 			janela[2].hide()
-			janela[4] = j.janela_estadio(num_do_jogo,estadio)
+			janela[4] = j.janela_estadio(num_do_jogo)
 
 		if 'estadio2' in event:
 			if event[8] == '0':
