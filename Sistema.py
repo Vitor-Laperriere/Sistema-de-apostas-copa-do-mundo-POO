@@ -8,7 +8,7 @@ class Sistema:
 
 	def __init__(self):
 
-		self.tabela = pd.read_csv(f'./admin.csv', sep=',')
+		self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
 	def login_valido(self, nome, senha):
 
@@ -20,13 +20,13 @@ class Sistema:
 
 	def registrar_usuario(self, usuario):
 
-		f = open(f'./admin.csv', 'a', newline='\n')
+		f = open(self.arquivo_usuarios, 'a', newline='\n')
 		writer = csv.writer(f)
 		linha = [str(usuario.ind), usuario.nome, usuario.senha, str(usuario.saldo)]
 		writer.writerow(linha)
 		f.close()
 
-		self.tabela = pd.read_csv(f'./admin.csv', sep=',')
+		self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
 if __name__ == '__main__':
 
