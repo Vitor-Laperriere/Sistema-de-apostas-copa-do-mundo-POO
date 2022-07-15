@@ -1,6 +1,7 @@
 from PySimpleGUI import PySimpleGUI as sg
 import os
 from fpdf import FPDF
+from Selecao import Selecao
 #from Jogo import Jogo
 
 
@@ -124,24 +125,15 @@ class Janela:
 		print("ID_DO_JOGO = ", id_do_jogo)
 		return self.estagio.GUI(id_do_jogo);
 
-	def janela_time(self,grupo,event):
+	def janela_selecao(self, grupo, event):
 
 		#mixer.init()
-
 		#mixer.music.load('hinos/grupo' + grupo + '/' + 'hino' + event[4])  # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome hino<i>.mp3 com i de 0 a 3
+		nome_arquivo = f'./texto_selecoes/grupo{grupo}/text{event[4]}.txt'
+		layout_info = Selecao(nome_arquivo).GUI()
+		layout = [[sg.Image(f'./fotos_selecoes/grupo{grupo}/fot{event[4]}.png'), sg.Column(layout_info, vertical_alignment = 'top')]]
 
-		file = open('texto_selecoes/grupo' + grupo + '/' + 'text' + event[4] + '.txt','r')
-
-		read_text_from_file = file.read()
-
-		layout = [
-
-			[sg.Image(filename='fotos_selecoes/grupo' + grupo + '/' + 'fot' + event[4] + '.png'), # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome fot<i>.mp3 com i de 0 a 3
-			sg.Text(read_text_from_file)],
-			[sg.Button('Voltar',key='voltar4')]
-		]
-
-		return sg.Window('Seleção',layout = layout,finalize = True)
+		return sg.Window('Seleção', layout = layout, finalize = True)
 
 	def escreve_recibo(self):
 
@@ -248,7 +240,6 @@ while True:
 
 	if window == janela[2] and event == 'apostar' or 'time' in event or 'estadio' in event:
 
-
 		jogo = int(grupo) - 1
 		num_do_jogo = int(jogo*6)
 
@@ -267,7 +258,7 @@ while True:
 		if 'time' in event:
 
 			janela[2].hide()
-			janela[3] = j.janela_time(grupo,event)
+			janela[3] = j.janela_selecao(grupo,event)
 
 		if 'estadio1' in event:
 			if event[8] == '0':

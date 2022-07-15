@@ -22,6 +22,12 @@ class Selecao:
 
         while i < len(linhas):
             self.texto += linhas[i]
+
+    def acessar_jogadores(self):
+        return self.jogadores
+
+    def acessar_pais(self):
+        return self.pais
     
     def GUI(self):
 
@@ -42,7 +48,7 @@ if __name__ == '__main__':
     #layout1 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
     #layout2 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
 
-    layout = [[sg.Image(f'./fotos_selecoes/grupo7/fot1.png'), sg.Column(layout1, vertical_alignment = 'top')]]
+    layout = [[sg.Image(f'./fotos_selecoes/grupo7/fot2.png'), sg.Column(layout1, vertical_alignment = 'top')]]
     #layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
 
 
