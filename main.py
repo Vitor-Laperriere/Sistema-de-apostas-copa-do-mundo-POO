@@ -17,9 +17,7 @@ class Janela:
 		[sg.Button('Entrar',font='Verdana 14 italic bold underline')]
 		]
 
-
 		return sg.Window('Login',layout=layout,finalize=True,font='Verdana 14 italic bold')
-
 
 	def janela_tabela(self):
 
@@ -29,14 +27,13 @@ class Janela:
 		sg.Button('Grupo D',key='4',size=(11,3)),
 		sg.Button('Grupo E',key='5',size=(11,3)),sg.Button('Grupo F',key='6',size=(11,3)),sg.Button('Grupo G',key='7',size=(11,3)),sg.Button('Grupo H',key='8',size=(11,3))],
 		[sg.Button('Voltar',font='Verdana 12 italic bold underline',key='voltar2')]
-
 		]
 
 		return sg.Window('Tabela',layout = layout,element_justification='c',font='Verdana 12 italic bold',finalize = True)
 
 	def janela_jogo(self,grupo):
+		
 		cwd = os.getcwd()
-
 		image = cwd + '/bandeiras/grupo'
 
 		vals = [['1','2','3','4'],['1','3','4','2'],['2','3','4','1']]
@@ -44,11 +41,9 @@ class Janela:
 		bets = [['0','1'],['2','3'],['4','5']]
 		tab = [0,0,0]
 
-
 		for i in range(3):
 
 			tab[i] = [
-
 				[sg.Button('',button_color = sg.TRANSPARENT_BUTTON,
 				image_filename = image + grupo + '/' + 'sel' + vals[i][0] + '.png' , image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][0]),
 				sg.Input(key='aposta0' + aposta[i][0],size= (2,1)),
@@ -67,16 +62,12 @@ class Janela:
 
 
 		layout = [
-
 			[sg.TabGroup([[
-				sg.Tab('Primeira rodada',tab[0]),
-				sg.Tab('Segunda Rodada',tab[1]),
-				sg.Tab('Terceira Rodada',tab[2])]])],
-				[sg.Button('Voltar',key='voltar3'),sg.Button('Apostar',key='apostar')]
-
+			sg.Tab('Primeira rodada',tab[0]),
+			sg.Tab('Segunda Rodada',tab[1]),
+			sg.Tab('Terceira Rodada',tab[2])]])],
+			[sg.Button('Voltar',key='voltar3'),sg.Button('Apostar',key='apostar')]
 		]
-
-
 
 		return sg.Window('Jogos do Grupo ' + grupo ,layout = layout,finalize = True)
 
@@ -184,14 +175,18 @@ class Estadio:
 
 	def __init__(self):
 		
-
 		self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
 			'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
 
-		                             #A          #B          #C          #D
-		self.stadium_per_game = [1,3,3,6,6,1,6,4,4,1,4,3,0,7,5,7,0,7,2,5,2,0,2,5,
-			3,6,4,1,6,1, 4,1,3,6,4,3, 7,2,2,0,0,7 ,5,0,5,7,2,5]
-			#E          #F            #G           #H
+		self.stadium_per_game = [
+			1,3,3,6,6,1,	#A
+			6,4,4,1,4,3,	#B
+			0,7,5,7,0,7,	#C
+			2,5,2,0,2,5,	#D
+			3,6,4,1,6,1,	#E
+			4,1,3,6,4,3,	#F
+			7,2,2,0,0,7,	#G
+			5,0,5,7,2,5]	#H
 
 	def get_StadiumFile(id_do_jogo):
 
