@@ -184,6 +184,7 @@ class Estadio:
 
 	def __init__(self):
 		
+
 		self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
 			'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
 
