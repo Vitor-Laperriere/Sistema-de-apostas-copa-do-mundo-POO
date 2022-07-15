@@ -15,10 +15,13 @@ class ApostaDoJogo(self):
 		self.palpite_sel_2 = p2
 		self.dinheiro_apostado = d
 
-	#	Funcao que remove uma aposta de um determinado jogo
+	#	Funcao que remove uma aposta de um determinado jogo.
 	def remover_aposta(self):
 
 		self.palpite_sel_1 = -1
 		self.palpite_sel_2 = -1
 		self.dinheiro_apostado = -1
+
+
+
 
