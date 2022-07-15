@@ -81,23 +81,23 @@ class Janela:
 		return sg.Window('Jogos do Grupo ' + grupo ,layout = layout,finalize = True)
 
 
-	def janela_estadio(self,num_do_jogo,estadio):
+	def janela_estadio(self, id_do_jogo, estadio):
 
 		estadio_requerido = estadio.stadium_per_game[num_do_jogo]
 
-		file = open('texto_estadios/' + 'estadio' + str(estadio_requerido) ,'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
+		file = open('texto_estadios/' + 'estadio' + str(estadio_requerido) , 'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
 
 		read_text_from_file = file.read()
 
 		layout = [
 
-			[sg.Image('estadios/'+ estadio.stadium_files[estadio_requerido])],
+			[sg.Image('estadios/'+ estadio.get_StadiumFile(id_do_jogo))],
 			[sg.Text(read_text_from_file)]
 			[sg.Button('Voltar',key='voltar5')]
 
 		]
 
-		return sg.Window('Estádio' + estadio.stadium_file[estadio_requerido] ,layout = layout,finalize = True)
+		return sg.Window('Estádio' + estadio.get_StadiumFile(id_do_jogo) ,layout = layout,finalize = True)
 
 
 	def janela_time(self,grupo,event):
@@ -182,13 +182,17 @@ class Estadio:
 	#khalifa 6
 	# lusail 7
 
-	stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
+	self.stadium_files = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
 		'althumama.png','binali.png','education.png','khalifa.png''lusail.png']
 
 	                             #A          #B          #C          #D
-	stadium_per_game = [1,3,3,6,6,1,6,4,4,1,4,3,0,7,5,7,0,7,2,5,2,0,2,5,
+	self.stadium_per_game = [1,3,3,6,6,1,6,4,4,1,4,3,0,7,5,7,0,7,2,5,2,0,2,5,
 		3,6,4,1,6,1, 4,1,3,6,4,3, 7,2,2,0,0,7 ,5,0,5,7,2,5]
 		#E          #F            #G           #H
+
+	def get_StadiumFile(id_do_jogo):
+
+		return self.stadium_files[self.stadium_per_game[id_do_jogo]]
 
 
 
