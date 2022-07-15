@@ -10,6 +10,17 @@ class Sistema:
 
 		self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
+	def usuario_registrado(self, usuario):
+
+		for i in self.tabela.index:
+			if self.tabela['nome'][i] == usuario.nome and\
+				self.tabela['senha'][i] == usuario.senha and\
+				 self.tabela['saldo'][i] == usuario.saldo and\
+				  self.tabela['id'][i] == usuario.ind:
+				return True
+
+		return False
+
 	def login_valido(self, nome, senha):
 
 		for i in self.tabela.index:
@@ -19,6 +30,10 @@ class Sistema:
 		return False
 
 	def registrar_usuario(self, usuario):
+
+		#	Caso onde usuario ja foi registrado
+		if self.usuario_registrado(usuario):
+			return
 
 		f = open(self.arquivo_usuarios, 'a', newline='\n')
 		writer = csv.writer(f)
