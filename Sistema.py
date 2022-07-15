@@ -4,7 +4,7 @@ from Usuario import Usuario
 
 class Sistema:
 
-	arquivo_usuarios = f'./admin.csv'
+	arquivo_usuarios = f'./users.csv'
 
 	def __init__(self):
 
