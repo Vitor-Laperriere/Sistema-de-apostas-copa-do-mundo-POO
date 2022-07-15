@@ -24,7 +24,8 @@ class Sistema:
 	def login_valido(self, nome, senha):
 
 		for i in self.tabela.index:
-			if self.tabela['nome'][i] == nome and self.tabela['senha'][i] == senha:
+
+			if str(self.tabela['nome'][i]) == nome and str(self.tabela['senha'][i]) == senha:
 				return True
 
 		return False

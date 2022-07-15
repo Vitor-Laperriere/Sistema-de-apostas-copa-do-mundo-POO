@@ -1,3 +1,5 @@
+import PySimpleGUI as sg
+
 class Estadios:
 
 	# 974 			0
@@ -36,7 +38,7 @@ class Estadios:
 		#read_text_from_file = file.read()
 
 		layout = [
-			[sg.Image('fotos/estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
+			[sg.Image('./fotos/estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
 			#[sg.Text(read_text_from_file)]
 			[sg.Button('Voltar',key='voltar5')]
 		]
