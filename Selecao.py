@@ -37,12 +37,12 @@ class Selecao:
 if __name__ == '__main__':
     arquivos = os.listdir('./texto_selecoes')
 
-    layout1 = selecao(f'./texto_selecoes/grupo7/text1.txt').GUI()
+    layout1 = Selecao(f'./texto_selecoes/grupo7/text3.txt').GUI()
     #layout2 = selecao(f'./texto_selecoes/grupo7/text2.txt').GUI()
     #layout1 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
     #layout2 = selecao(f'./texto_selecoes/grupo7/{random.choice(arquivos)}').GUI()
 
-    layout = [[sg.Image(f'./fotos_selecoes/grupo7/fot2.png'), sg.Column(layout1, vertical_alignment = 'top')]]
+    layout = [[sg.Image(f'./fotos_selecoes/grupo7/fot1.png'), sg.Column(layout1, vertical_alignment = 'top')]]
     #layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
 
 

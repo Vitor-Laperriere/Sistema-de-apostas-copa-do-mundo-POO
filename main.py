@@ -308,4 +308,4 @@ while True:
 
 
 
-j.escreve_recibo()
+#j.escreve_recibo()
