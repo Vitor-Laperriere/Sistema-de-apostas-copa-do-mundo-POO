@@ -82,17 +82,17 @@ class Janela:
             tab[i] = [
                 [sg.Button('',button_color = sg.TRANSPARENT_BUTTON,
                 image_filename = image + grupo + '/' + 'sel' + vals[i][0] + '.png' , image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][0]),
-                sg.Input(key='aposta0' + aposta[i][0], size=(2,1)),
-                sg.Input(key='aposta1' + aposta[i][1], size=(2,1)),
+                sg.Input(key='aposta0' + aposta[i][0], size=(3,1)),
+                sg.Input(key='aposta1' + aposta[i][1], size=(3,1)),
                 sg.ReadFormButton('',button_color = sg.TRANSPARENT_BUTTON,
-                image_filename = image + grupo + '/' + 'sel' + vals[i][1] + '.png', image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][1]),sg.Input(key='bet' + bets[i][0], size=(2,1)),
+                image_filename = image + grupo + '/' + 'sel' + vals[i][1] + '.png', image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][1]),sg.Input(key='bet' + bets[i][0], size=(7,1)),
                 sg.Button('Estádio',key='estadio1' + str(i))],
                 [sg.Button('',button_color = sg.TRANSPARENT_BUTTON,
                 image_filename = image + grupo + '/' + 'sel' + vals[i][2] + '.png', image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][2]),
-                sg.Input(key='aposta0' + aposta[i][2], size=(2,1)),
-                sg.Input(key='aposta1' + aposta[i][3], size=(2,1)),
+                sg.Input(key='aposta0' + aposta[i][2], size=(3,1)),
+                sg.Input(key='aposta1' + aposta[i][3], size=(3,1)),
                 sg.ReadFormButton('',button_color = sg.TRANSPARENT_BUTTON,
-                image_filename = image + grupo + '/' + 'sel' + vals[i][3] + '.png', image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][3]),sg.Input(key='bet' + bets[i][1], size=(2,1)),
+                image_filename = image + grupo + '/' + 'sel' + vals[i][3] + '.png', image_size=(50,33), image_subsample=2, border_width=1,key='time' + vals[i][3]),sg.Input(key='bet' + bets[i][1], size=(7,1)),
                 sg.Button('Estádio',key='estadio2'+str(i))] 
             ]
 
