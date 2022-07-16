@@ -97,7 +97,7 @@ class Janela:
 			[sg.Button('Voltar', key='voltar6')]
 		]
 
-		return sg.Window('Seleção', layout = layout, finalize = True, element_justification='c')
+		return sg.Window('Seleção', layout = layout, finalize = True, element_justification='c')git ad
 
 	def escreve_recibo(self, usuario):
 
