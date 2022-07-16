@@ -6,9 +6,6 @@ from Selecao import Selecao
 from Estadios import Estadios
 import os
 import time
-#from Jogo import Jogo
-
-sg.theme('DarkRed')
 
 class Janela:
 
@@ -17,8 +14,8 @@ class Janela:
 		layout = [
 			[sg.Text('Usuário'), sg.Input(key='user', size=(20,1))],
 			[sg.Text('Senha  '), sg.Input(key='senha', password_char='*', size=(20,1))],
-			[sg.Button('Registrar', font='Verdana 14 italic bold underline')],
-			[sg.Button('Entrar', font='Verdana 14 italic bold underline')],
+			[sg.Button('Registrar', font='Verdana 14 italic bold underline'),
+			sg.Button('Entrar', font='Verdana 14 italic bold underline')],
 		]
 
 		return sg.Window('Login', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
@@ -153,6 +150,8 @@ class Janela:
 
 if __name__ == '__main__':
 
+	sg.theme('DarkRed')
+	
 	J = Janela()
 	janela = 5 * [None]
 	janela[0] = J.janela_login()

@@ -31,19 +31,20 @@ class Selecao:
     
     def GUI(self):
 
-        linha1 = [sg.Text(self.pais)]
-        linha2 = [sg.Text('Elenco:')]
-        linha3 = [sg.Column([[sg.Text(jogador)] for jogador in self.jogadores], scrollable = True, vertical_scroll_only = True)]
-        linha4 = [sg.Text(self.texto, size = (60, None))]
-        gui = [linha1, linha2, linha3, linha4]
+        linha1 = [sg.Text(self.pais, font=("Helvetica", 25), text_color = "white")]
+        linha2 = [sg.Text('\nJogadores:', font=("Helvetica", 14), text_color = "white")]
+        linha3 = [sg.Column([[sg.Text(jogador)] for jogador in self.jogadores], scrollable = True, vertical_scroll_only = True, size = (None, 120))]
+        linha4 = [sg.Text('\nDescrição:', font=("Helvetica", 14), text_color = "white")]
+        linha5 = [sg.Text(self.texto, size = (30, None), font=("Helvetica", 12))]
+        gui = [linha1, linha2, linha3, linha4, linha5]
 
         return gui
 
 
 if __name__ == '__main__':
-    arquivos = os.listdir('./texto/selecoes')
+    arquivos = os.listdir('./textos/selecoes')
 
-    layout1 = Selecao(f'./texto/selecoes/grupo7/text3.txt').GUI()
+    layout1 = Selecao(f'./textos/selecoes/grupo7/text3.txt').GUI()
     #layout2 = selecao(f'./texto/selecoes/grupo7/text2.txt').GUI()
     #layout1 = selecao(f'./texto/selecoes/grupo7/{random.choice(arquivos)}').GUI()
     #layout2 = selecao(f'./texto/selecoes/grupo7/{random.choice(arquivos)}').GUI()
