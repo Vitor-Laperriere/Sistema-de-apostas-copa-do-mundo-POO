@@ -33,13 +33,13 @@ class Estadios:
 
 	def GUI(self, id_do_jogo):
 
-		#id_do_estadio = self.estadio_do_jogo[num_do_jogo]
-		#file = open('texto_estadios/' + 'estadio' + str(id_do_estadio) , 'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
-		#read_text_from_file = file.read()
+		id_do_estadio = self.estadio_do_jogo[id_do_jogo]
+		file = open('textos/estadios/' + str(id_do_estadio)+ '.txt' , 'r') #texto dos estadios devem estar em um arquivo do tipo estadio<i> com i de 0 a 7
+		read_text_from_file = file.read()
 
 		layout = [
 			[sg.Image('./fotos/estadios/'+ self.acessar_arquivo_do_estadio(id_do_jogo))],
-			#[sg.Text(read_text_from_file)]
+			[sg.Text(read_text_from_file, size = (60, None), font=("Helvetica", 12))],
 			[sg.Button('Voltar',key='voltar5')]
 		]
 
