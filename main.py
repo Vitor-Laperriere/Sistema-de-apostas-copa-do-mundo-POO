@@ -20,6 +20,16 @@ class Janela:
 
 		return sg.Window('Login', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
 
+	def janela_usuario_ja_registrado(self):
+
+		layout = [
+			[sg.Text('Nome de usuário já registrado.')],
+			[sg.Text('Tente outro.')],
+			[sg.Button('Voltar',font='Verdana 12 italic bold underline', key='voltarDoAviso')]
+		]
+
+		return sg.Window('Aviso', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
+
 	def janela_tabela(self):
 
 		layout = [
@@ -151,9 +161,9 @@ class Janela:
 if __name__ == '__main__':
 
 	sg.theme('DarkRed')
-	
+
 	J = Janela()
-	janela = 5 * [None]
+	janela = 6 * [None]
 	janela[0] = J.janela_login()
 
 	grupo = '1'
@@ -193,15 +203,20 @@ if __name__ == '__main__':
 			usuario.senha = str(values['senha'])
 			usuario.saldo = 0
 
-			if event == 'Entrar' and sistema.login_valido(usuario.nome, usuario.senha):
+			if event == 'Entrar' and sistema.login_valido(usuario):
 				
 				janela[0].hide()
 				janela[1] = J.janela_tabela()
 			
-			elif event == 'Registrar':
+			elif event == 'Registrar' and not sistema.usuario_registrado(usuario):
 				
 				usuario.ind = int(time.time())
 				sistema.registrar_usuario(usuario)
+
+			elif event == 'Registrar' and sistema.usuario_registrado(usuario):
+					
+				janela[0].hide()
+				janela[5] = J.janela_usuario_ja_registrado()
 
 			
 		if window == janela[1] and event != 'voltar2':
@@ -259,10 +274,14 @@ if __name__ == '__main__':
 				janela[4] = J.janela_estadio(num_do_jogo)
 
 
+		if window == janela[3] and event == 'voltar6':
+			janela[3].hide()
+			janela[2].un_hide()
+
 		if window == janela[4] and event == 'voltar5':
 			janela[4].hide()
 			janela[2].un_hide()
 
-		if window == janela[3] and event == 'voltar6':
-			janela[3].hide()
-			janela[2].un_hide()
+		if window == janela[5] and event == 'voltarDoAviso':
+			janela[5].hide()
+			janela[0].un_hide()

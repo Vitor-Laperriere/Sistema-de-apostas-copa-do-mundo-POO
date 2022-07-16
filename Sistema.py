@@ -13,19 +13,20 @@ class Sistema:
 	def usuario_registrado(self, usuario):
 
 		for i in self.tabela.index:
-			if self.tabela['nome'][i] == usuario.nome and\
-				self.tabela['senha'][i] == usuario.senha and\
-				 self.tabela['saldo'][i] == usuario.saldo and\
-				  self.tabela['id'][i] == usuario.ind:
+			if self.tabela['nome'][i] == usuario.nome:# and\
+				#self.tabela['senha'][i] == usuario.senha and\
+				 #self.tabela['saldo'][i] == usuario.saldo and\
+				  #self.tabela['id'][i] == usuario.ind:
 				return True
 
 		return False
 
-	def login_valido(self, nome, senha):
+	def login_valido(self, usuario):
 
 		for i in self.tabela.index:
 
-			if str(self.tabela['nome'][i]) == nome and str(self.tabela['senha'][i]) == senha:
+			if str(self.tabela['nome'][i]) == usuario.nome and\
+			 str(self.tabela['senha'][i]) == usuario.senha:
 				return True
 
 		return False
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 
 	s.registrar_usuario(otavio)
 
-	if s.login_valido(otavio.nome, otavio.senha):
+	if s.login_valido(otavio):
 		print("Login :)")
 	else:
 		print("Sem Login :(")
