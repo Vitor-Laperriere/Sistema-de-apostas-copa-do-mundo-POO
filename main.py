@@ -91,9 +91,13 @@ class Janela:
 		#mixer.music.load('hinos/grupo' + grupo + '/' + 'hino' + event[4])  # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome hino<i>.mp3 com i de 0 a 3
 		nome_arquivo = f'./textos/selecoes/grupo{grupo}/text{event[4]}.txt'
 		layout_info = Selecao(nome_arquivo).GUI()
-		layout = [[sg.Image(f'./fotos/selecoes/grupo{grupo}/fot{event[4]}.png'), sg.Column(layout_info, vertical_alignment = 'top')]]
+		layout = [
+			[sg.Image(f'./fotos/selecoes/grupo{grupo}/fot{event[4]}.png'), 
+			sg.Column(layout_info, vertical_alignment = 'top')], 
+			[sg.Button('Voltar', key='voltar6')]
+		]
 
-		return sg.Window('Seleção', layout = layout, finalize = True)
+		return sg.Window('Seleção', layout = layout, finalize = True, element_justification='c')
 
 	def escreve_recibo(self, usuario):
 
@@ -258,4 +262,8 @@ if __name__ == '__main__':
 
 		if window == janela[4] and event == 'voltar5':
 			janela[4].hide()
+			janela[2].un_hide()
+
+		if window == janela[3] and event == 'voltar6':
+			janela[3].hide()
 			janela[2].un_hide()
