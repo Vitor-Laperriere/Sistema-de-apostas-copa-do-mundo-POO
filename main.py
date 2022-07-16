@@ -144,8 +144,7 @@ class Janela:
 
         file = open('./textos/selecoes.txt','r')
         
-        for i in range(48):
-            print(apostas[i].aposta_realizada)
+        usuario.saldo = 0
 
         num_do_jogo = int(0)
         for grupo in range (8):
@@ -172,6 +171,7 @@ class Janela:
                     proximo_texto_pdf = 'R$' + str(apostas[num_do_jogo].dinheiro_apostado)
                     print(proximo_texto_pdf)
                     pdf.cell(0, 10, txt = proximo_texto_pdf, ln = 1, align = 'R') 
+                    usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
 
                 if apostas[num_do_jogo].aposta_realizada:
@@ -181,6 +181,7 @@ class Janela:
                     proximo_texto_pdf = 'R$ ' + str(apostas[num_do_jogo].dinheiro_apostado)
                     print(proximo_texto_pdf)
                     pdf.cell(0, 10, txt = proximo_texto_pdf, ln = 1, align = 'R') 
+                    usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
 
 
@@ -288,7 +289,6 @@ if __name__ == '__main__':
                     valor_aposta = values['bet' + str(i)]
                     if(palpites[0].isdigit() and palpites[1].isdigit() and valor_aposta.isdigit()):  # esse if impede que insira apostas inválidas
                         apostas[num_do_jogo].definir_aposta(palpites[0], palpites[1], valor_aposta)
-                        usuario.adicionar_saldo(int(valor_aposta))
                     
                     num_do_jogo += 1
 
