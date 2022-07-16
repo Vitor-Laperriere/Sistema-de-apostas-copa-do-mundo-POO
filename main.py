@@ -154,8 +154,12 @@ class Janela:
                 num_do_jogo += 6
                 linha = file.readline()
                 continue
-
-            proximo_texto_pdf = 55 * '-' + ' Grupo ' + chr(grupo + ord('A')) + ' ' + 50 * '-'
+            
+            proximo_texto_pdf = '-' * 150
+            pdf.cell(200, 10, txt = proximo_texto_pdf, ln = 1, align = 'C')
+            proximo_texto_pdf = 'Grupo ' + chr(grupo + ord('A'))
+            pdf.cell(200, 10, txt = proximo_texto_pdf, ln = 1, align = 'C')
+            proximo_texto_pdf = '-' * 150
             pdf.cell(200, 10, txt = proximo_texto_pdf, ln = 1, align = 'C')
             linha = file.readline()
             selecoes = linha.split(',')
@@ -187,7 +191,7 @@ class Janela:
         pdf.cell(0, 10, txt = proximo_texto_pdf, ln = 0, align = 'L')
 
         proximo_texto_pdf = 'R$' + str(usuario.saldo)
-        pdf.cell(0, 10, txt = proximo_texto_pdf, ln = 0, align = 'R')
+        pdf.cell(0, 10, txt = proximo_texto_pdf, ln = 1, align = 'R')
 
 
         pdf.output(usuario.nome + ".pdf")
@@ -285,6 +289,8 @@ if __name__ == '__main__':
                     if(palpites[0].isdigit() and palpites[1].isdigit() and valor_aposta.isdigit()):  # esse if impede que insira apostas inválidas
                         apostas[num_do_jogo].definir_aposta(palpites[0], palpites[1], valor_aposta)
                         usuario.adicionar_saldo(int(valor_aposta))
+                    
+                    num_do_jogo += 1
 
             J.escreve_recibo(usuario, apostas)
 
