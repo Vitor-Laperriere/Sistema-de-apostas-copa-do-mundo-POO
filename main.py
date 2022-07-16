@@ -30,6 +30,26 @@ class Janela:
 
 		return sg.Window('Aviso', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
 
+	def janela_usuario_nao_registrado(self):
+
+		layout = [
+			[sg.Text('Nome de usuário não encontrado.')],
+			[sg.Text('Registre ele para acessar o sistema.')],
+			[sg.Button('Voltar',font='Verdana 12 italic bold underline', key='voltarDoAviso2')]
+		]
+
+		return sg.Window('Aviso', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
+
+	def janela_senha_incorreta(self):
+
+		layout = [
+			[sg.Text('Senha incorreta.')],
+			[sg.Button('Voltar',font='Verdana 12 italic bold underline', key='voltarDoAviso3')]
+		]
+
+		return sg.Window('Aviso', layout=layout, finalize=True, font='Verdana 14 italic bold', element_justification='c')
+
+
 	def janela_tabela(self):
 
 		layout = [
@@ -163,7 +183,7 @@ if __name__ == '__main__':
 	sg.theme('DarkRed')
 
 	J = Janela()
-	janela = 6 * [None]
+	janela = 8 * [None]
 	janela[0] = J.janela_login()
 
 	grupo = '1'
@@ -203,7 +223,17 @@ if __name__ == '__main__':
 			usuario.senha = str(values['senha'])
 			usuario.saldo = 0
 
-			if event == 'Entrar' and sistema.login_valido(usuario):
+			if event == 'Entrar' and not sistema.usuario_registrado(usuario):
+				
+				janela[0].hide()
+				janela[6] = J.janela_usuario_nao_registrado()
+
+			elif event == 'Entrar' and not sistema.login_valido(usuario):
+				
+				janela[0].hide()
+				janela[7] = J.janela_senha_incorreta()
+
+			elif event == 'Entrar' and sistema.login_valido(usuario):
 				
 				janela[0].hide()
 				janela[1] = J.janela_tabela()
@@ -284,4 +314,12 @@ if __name__ == '__main__':
 
 		if window == janela[5] and event == 'voltarDoAviso':
 			janela[5].hide()
+			janela[0].un_hide()
+
+		if window == janela[6] and event == 'voltarDoAviso2':
+			janela[6].hide()
+			janela[0].un_hide()
+
+		if window == janela[7] and event == 'voltarDoAviso3':
+			janela[7].hide()
 			janela[0].un_hide()

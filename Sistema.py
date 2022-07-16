@@ -27,6 +27,10 @@ class Sistema:
 
 			if str(self.tabela['nome'][i]) == usuario.nome and\
 			 str(self.tabela['senha'][i]) == usuario.senha:
+
+				usuario.ind = int(self.tabela['id'][i])
+				usuario.saldo = int(self.tabela['saldo'][i])
+
 				return True
 
 		return False
