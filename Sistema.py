@@ -1,7 +1,9 @@
 import csv
 import pandas as pd
+from PyPDF2 import PdfFileWriter, PdfFileReader
 from fpdf import FPDF
 from Usuario import Usuario
+import os
 
 
 class Sistema:
@@ -112,7 +114,39 @@ class Sistema:
         proximo_texto_pdf = 'Total à pagar R$' + str(usuario.saldo)
         pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
 
-        pdf.output(usuario.nome + ".pdf")
+        out = PdfFileWriter()
+
+        pdf.output(usuario.nome + '1'+ ".pdf")
+
+        # Open our PDF file with the PdfFileReader
+        file = PdfFileReader(usuario.nome + '1'+ ".pdf")
+
+        # Get number of pages in original file
+        num = file.numPages
+
+        # Iterate through every page of the original
+        # file and add it to our new file.
+        for idx in range(num):
+            # Get the page at index idx
+            page = file.getPage(idx)
+
+            # Add it to the output file
+            out.addPage(page)
+
+        # Create a variable password and store
+        # our password in it.
+        password = usuario.senha
+
+        # Encrypt the new file with the entered password
+        out.encrypt(password)
+
+        # Open a new file "myfile_encrypted.pdf"
+        with open(usuario.nome + ".pdf", "wb") as f:
+
+            # Write our encrypted PDF to this file
+            out.write(f)
+
+        os.remove(usuario.nome + '1'+ ".pdf")
 
         return
 
