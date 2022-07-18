@@ -7,13 +7,14 @@ from ApostaDoJogo import ApostaDoJogo
 from Janela import Janela
 import os
 import time
+from pygame import mixer
 
 
 class Janela:
 
     def janela_login(self):
         layout = [
-            [sg.Image(filename="./fotos/BETUSP.png", size=(1280, 650))],
+            [sg.Image(filename="./fotos/BETUSP.png", size=(1280, 720))],
             [sg.Text('Usuário'), sg.Input(key='user', size=(20, 1))],
             [sg.Text('Senha  '), sg.Input(key='senha', password_char='*', size=(20, 1))],
             [sg.Button('Registrar', font='Verdana 14 italic bold underline'),
@@ -123,13 +124,16 @@ class Janela:
         return self.estagio.GUI(id_do_jogo);
 
     def janela_selecao(self, grupo, event):
-        # mixer.init()
-        # mixer.music.load('hinos/grupo' + grupo + '/' + 'hino' + event[4])  # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome hino<i>.mp3 com i de 0 a 3
+        mixer.init()
+        mixer.music.load(f'./hinos/grupo{grupo}/hino{event[4]}.mp3')  # cada grupo é um arquivo de 0 a 7 dentro os arquivos tem nome hino<i>.mp3 com i de 0 a 3
         nome_arquivo = f'./textos/selecoes/grupo{grupo}/text{event[4]}.txt'
         layout_info = Selecao(nome_arquivo).GUI()
         layout = [
             [sg.Image(f'./fotos/selecoes/grupo{grupo}/fot{event[4]}.png'),
              sg.Column(layout_info, vertical_alignment='top')],
+            [sg.Text('Clique aqui para tocar o hino do país ->',font='Verdana 12 italic bold'),
+            sg.Button('Play >',key='play',font='Verdana 10 underline'),
+            sg.Button('Pause | |',key='pause',font='Verdana 10 underline')],
             [sg.Button('Voltar', key='voltar6')]
         ]
 
@@ -152,6 +156,8 @@ if __name__ == '__main__':
 
     sistema = Sistema()
     usuario = Usuario()
+
+    musica_tocando = 0
 
     while True:
 
@@ -255,6 +261,20 @@ if __name__ == '__main__':
                 print(num_do_jogo)
                 janela[2].hide()
                 janela[4] = J.janela_estadio(num_do_jogo)
+
+        if window == janela[3] and event == 'play':
+            mixer.music.play()
+            musica_tocando = 1
+
+        if window == janela[3] and event == 'pause':
+
+            if (musica_tocando == 0):
+                mixer.music.unpause()
+                musica_tocando = 1
+
+            elif (musica_tocando):
+                mixer.music.pause()
+                musica_tocando = 0
 
         if window == janela[3] and event == 'voltar6':
             janela[3].hide()
