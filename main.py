@@ -13,6 +13,7 @@ class Janela:
 
     def janela_login(self):
         layout = [
+            [sg.Image(filename="./fotos/BETUSP.png", size=(1280, 650))],
             [sg.Text('Usuário'), sg.Input(key='user', size=(20, 1))],
             [sg.Text('Senha  '), sg.Input(key='senha', password_char='*', size=(20, 1))],
             [sg.Button('Registrar', font='Verdana 14 italic bold underline'),
