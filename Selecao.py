@@ -41,24 +41,3 @@ class Selecao:
         return gui
 
 
-if __name__ == '__main__':
-    arquivos = os.listdir('./textos/selecoes')
-
-    layout1 = Selecao(f'./textos/selecoes/grupo7/text3.txt').GUI()
-    #layout2 = selecao(f'./texto/selecoes/grupo7/text2.txt').GUI()
-    #layout1 = selecao(f'./texto/selecoes/grupo7/{random.choice(arquivos)}').GUI()
-    #layout2 = selecao(f'./texto/selecoes/grupo7/{random.choice(arquivos)}').GUI()
-
-    layout = [[sg.Image(f'./fotos/selecoes/grupo7/fot2.png'), sg.Column(layout1, vertical_alignment = 'top')]]
-    #layout = [[sg.Column(layout1, vertical_alignment = 'top'), sg.Column(layout2, vertical_alignment = 'top')]]
-
-
-    window = sg.Window('Teste', layout)
-
-    while True:
-        event, value = window.read()
-
-        if event == sg.WINDOW_CLOSED or event == 'Quit':
-            break
-
-    window.close()

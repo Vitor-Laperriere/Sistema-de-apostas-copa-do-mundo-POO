@@ -1,9 +1,9 @@
 import csv
+import os
+
 import pandas as pd
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from fpdf import FPDF
-from Usuario import Usuario
-import os
 
 
 class Sistema:
@@ -16,10 +16,7 @@ class Sistema:
     def usuario_registrado(self, usuario):
 
         for i in self.tabela.index:
-            if self.tabela['nome'][i] == usuario.nome:  # and\
-                # self.tabela['senha'][i] == usuario.senha and\
-                # self.tabela['saldo'][i] == usuario.saldo and\
-                # self.tabela['id'][i] == usuario.ind:
+            if self.tabela['nome'][i] == usuario.nome:
                 return True
 
         return False
@@ -64,7 +61,7 @@ class Sistema:
         usuario.saldo = 0
 
         num_do_jogo = int(0)
-        for grupo in range(8):
+        for grupo in range(8): # loop que escreve todos os grupos no arquivo recibo
             foi_apostado = [apostas[i].aposta_realizada for i in range(num_do_jogo, num_do_jogo + 6)]
             if not any(foi_apostado):
                 num_do_jogo += 6
@@ -114,51 +111,35 @@ class Sistema:
         proximo_texto_pdf = 'Total à pagar R$' + str(usuario.saldo)
         pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
 
-        out = PdfFileWriter()
 
-        pdf.output(usuario.nome + '1'+ ".pdf")
 
-        # Open our PDF file with the PdfFileReader
+        pdf.output(usuario.nome + '1'+ ".pdf") #crio um pdf sem criptografia
+
+
+
+        # abro ele com a biblioteca de criptografia
         file = PdfFileReader(usuario.nome + '1'+ ".pdf")
 
-        # Get number of pages in original file
-        num = file.numPages
 
-        # Iterate through every page of the original
-        # file and add it to our new file.
+        out = PdfFileWriter() #crio um objeto de escrita
+        num = file.numPages     #percorro suas páginas
         for idx in range(num):
-            # Get the page at index idx
+
             page = file.getPage(idx)
 
-            # Add it to the output file
+            #e adiciono nesse objeto
             out.addPage(page)
 
-        # Create a variable password and store
-        # our password in it.
-        password = usuario.senha
+        # encripto o objetp com a senha do usuário
+        out.encrypt(usuario.senha)
 
-        # Encrypt the new file with the entered password
-        out.encrypt(password)
-
-        # Open a new file "myfile_encrypted.pdf"
         with open(usuario.nome + ".pdf", "wb") as f:
 
-            # Write our encrypted PDF to this file
+            # Gero o pdf a partir desse arquivo criptografado que criei
             out.write(f)
 
-        os.remove(usuario.nome + '1'+ ".pdf")
+        os.remove(usuario.nome + '1'+ ".pdf")  # removo o antigo não criptografado
 
         return
 
 
-if __name__ == '__main__':
-
-    s = Sistema()
-    otavio = Usuario('Otavio', '12', 2, 1)
-
-    s.registrar_usuario(otavio)
-
-    if s.login_valido(otavio):
-        print("Login :)")
-    else:
-        print("Sem Login :(")
