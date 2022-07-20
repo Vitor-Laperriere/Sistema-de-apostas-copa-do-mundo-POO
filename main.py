@@ -33,7 +33,7 @@ if __name__ == '__main__':
     while True:
 
         window, event, values = sg.read_all_windows()
-        print(event)
+        #print(event)
 
         if window and event == sg.WIN_CLOSED:
             break
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             num_do_jogo = int(jogo * 6)
 
             if event == 'apostar':
-                print("aposta realizada")
+                # print("aposta realizada")
 
                 for i in range(6):
                     palpites = [values['aposta0' + str(i)], values['aposta1' + str(i)]]
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                 else:
                     num_do_jogo = num_do_jogo + 5
 
-                print(num_do_jogo)
+                #print(num_do_jogo)
                 janela[2].hide()
                 janela[4] = J.janela_estadio(num_do_jogo)
 

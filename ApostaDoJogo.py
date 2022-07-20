@@ -14,7 +14,7 @@ class ApostaDoJogo:
         self.palpite_sel_1 = p1
         self.palpite_sel_2 = p2
         self.dinheiro_apostado = d
-        print(f"Setei os valores {p1}, {p2} e {d}")
+        #print(f"Setei os valores {p1}, {p2} e {d}")
 
     #   Funcao que remove uma aposta de um determinado jogo.
     def remover_aposta(self):

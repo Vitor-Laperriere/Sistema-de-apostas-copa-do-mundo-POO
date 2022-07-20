@@ -82,10 +82,10 @@ class Sistema:
                     proximo_texto_pdf = selecoes[vals[rodada][0]] + ' ' + str(
                         apostas[num_do_jogo].palpite_sel_1) + ' x ' + str(apostas[num_do_jogo].palpite_sel_2) + ' ' + \
                                         selecoes[vals[rodada][1]]
-                    print(proximo_texto_pdf)
+                    #print(proximo_texto_pdf)
                     pdf.cell(200, 10, txt=proximo_texto_pdf, ln=0, align='L')
                     proximo_texto_pdf = 'R$' + str(apostas[num_do_jogo].dinheiro_apostado)
-                    print(proximo_texto_pdf)
+                    #print(proximo_texto_pdf)
                     pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
                     usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
@@ -94,10 +94,10 @@ class Sistema:
                     proximo_texto_pdf = selecoes[vals[rodada][2]] + ' ' + str(
                         apostas[num_do_jogo].palpite_sel_1) + ' x ' + str(apostas[num_do_jogo].palpite_sel_2) + ' ' + \
                                         selecoes[vals[rodada][3]]
-                    print(proximo_texto_pdf)
+                    #print(proximo_texto_pdf)
                     pdf.cell(200, 10, txt=proximo_texto_pdf, ln=0, align='L')
                     proximo_texto_pdf = 'R$ ' + str(apostas[num_do_jogo].dinheiro_apostado)
-                    print(proximo_texto_pdf)
+                    #print(proximo_texto_pdf)
                     pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
                     usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
