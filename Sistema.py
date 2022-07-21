@@ -57,6 +57,8 @@ class Sistema:
 
         self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
+        return
+
     # Metodo que cria um pdf com senha que contem as apostas de um usuario
     def escreve_recibo(self, usuario, apostas):
 
@@ -121,15 +123,10 @@ class Sistema:
         proximo_texto_pdf = 'Total à pagar R$' + str(usuario.saldo)
         pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
 
-
-
         pdf.output(usuario.nome + '1'+ ".pdf") #crio um pdf sem criptografia
-
-
 
         # abro ele com a biblioteca de criptografia
         file = PdfFileReader(usuario.nome + '1'+ ".pdf")
-
 
         out = PdfFileWriter() #crio um objeto de escrita
         num = file.numPages     #percorro suas páginas

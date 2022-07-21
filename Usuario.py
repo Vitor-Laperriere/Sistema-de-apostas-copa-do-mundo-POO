@@ -1,6 +1,7 @@
-#	Classe que guarda informacoes sobre o usuario que ira acessar o sistema
+# Classe que guarda informacoes sobre o usuario que ira acessar o sistema
 class Usuario:
 
+	# Construtor da classe
 	def __init__(self, Nome = None, Senha = None, Saldo = 0, Indentificador = -1):
 
 		self.nome = Nome
@@ -22,6 +23,3 @@ class Usuario:
 
 	def reduzir_saldo(self, s):
 		self.saldo -= s
-
-	def __str__(self):
-		return f'Usuário {self.nome} possui saldo de R$ {self.saldo} na conta.'
