@@ -5,14 +5,18 @@ import pandas as pd
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from fpdf import FPDF
 
-
+# Classe que gerencia os usuarios do sistema e gera o recibo das apostas
 class Sistema:
+
+    # Caminho para o arquivo de usuarios
     arquivo_usuarios = f'./users.csv'
 
+    # Construtor da classe
     def __init__(self):
-
+        # Armazenando o banco de usuarios em uma tabela
         self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
+    # Metodo que retorna verdadeiro se um usuario estiver registrado
     def usuario_registrado(self, usuario):
 
         for i in self.tabela.index:
@@ -21,10 +25,13 @@ class Sistema:
 
         return False
 
+    # Metodo que retorna verdadeiro se um login for valido
+    # Ou seja, o nome do usuario e a senha devem estar condizentes
     def login_valido(self, usuario):
 
+        # Iterando sobre a tabela de usuarios
         for i in self.tabela.index:
-
+            # Verificando se o nome do usuario e a senha sao encontrados na tabela
             if str(self.tabela['nome'][i]) == usuario.nome and \
                     str(self.tabela['senha'][i]) == usuario.senha:
                 usuario.ind = int(self.tabela['id'][i])
@@ -34,12 +41,14 @@ class Sistema:
 
         return False
 
+    # Metodo que registra um usuario no banco de usuarios
     def registrar_usuario(self, usuario):
 
-        #   Caso onde usuario ja foi registrado
+        # Caso onde usuario ja foi registrado
         if self.usuario_registrado(usuario):
             return
 
+        # Escrevendo o nome usuario no arquivo de usuarios
         f = open(self.arquivo_usuarios, 'a', newline='\n')
         writer = csv.writer(f)
         linha = [str(usuario.ind), usuario.nome, usuario.senha, str(usuario.saldo)]
@@ -48,6 +57,7 @@ class Sistema:
 
         self.tabela = pd.read_csv(self.arquivo_usuarios, sep=',')
 
+    # Metodo que cria um pdf com senha que contem as apostas de um usuario
     def escreve_recibo(self, usuario, apostas):
 
         pdf = FPDF()
@@ -82,10 +92,10 @@ class Sistema:
                     proximo_texto_pdf = selecoes[vals[rodada][0]] + ' ' + str(
                         apostas[num_do_jogo].palpite_sel_1) + ' x ' + str(apostas[num_do_jogo].palpite_sel_2) + ' ' + \
                                         selecoes[vals[rodada][1]]
-                    #print(proximo_texto_pdf)
+                    
                     pdf.cell(200, 10, txt=proximo_texto_pdf, ln=0, align='L')
                     proximo_texto_pdf = 'R$' + str(apostas[num_do_jogo].dinheiro_apostado)
-                    #print(proximo_texto_pdf)
+                    
                     pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
                     usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
@@ -94,10 +104,10 @@ class Sistema:
                     proximo_texto_pdf = selecoes[vals[rodada][2]] + ' ' + str(
                         apostas[num_do_jogo].palpite_sel_1) + ' x ' + str(apostas[num_do_jogo].palpite_sel_2) + ' ' + \
                                         selecoes[vals[rodada][3]]
-                    #print(proximo_texto_pdf)
+                    
                     pdf.cell(200, 10, txt=proximo_texto_pdf, ln=0, align='L')
                     proximo_texto_pdf = 'R$ ' + str(apostas[num_do_jogo].dinheiro_apostado)
-                    #print(proximo_texto_pdf)
+                    
                     pdf.cell(0, 10, txt=proximo_texto_pdf, ln=1, align='R')
                     usuario.adicionar_saldo(int(apostas[num_do_jogo].dinheiro_apostado))
                 num_do_jogo += 1
@@ -130,7 +140,7 @@ class Sistema:
             #e adiciono nesse objeto
             out.addPage(page)
 
-        # encripto o objetp com a senha do usuário
+        # encripto o objeto com a senha do usuário
         out.encrypt(usuario.senha)
 
         with open(usuario.nome + ".pdf", "wb") as f:
