@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-
+	
+# Classe que armazena as informacoes dos estadios
 class Estadios:
 
 	# 974 			0
@@ -11,6 +12,7 @@ class Estadios:
 	#khalifa 		6
 	# lusail 		7
 
+	# Construtor da classe
 	def __init__(self):
 		
 		self.arquivo_do_estadio = ['974.png','Al_Bayt_Stadium.png','aljanoub.png',
@@ -27,10 +29,12 @@ class Estadios:
 			5,0,5,7,2,5 	#	Grupo H
 		]
 
+	# Metodo que retorna o nome do arquivo da foto de um determinado estadio
 	def acessar_arquivo_do_estadio(self, id_do_jogo):
 
 		return self.arquivo_do_estadio[self.estadio_do_jogo[id_do_jogo]]
 
+	# Metodo que retorna uma janela com as informacoes de um determinado estadio 
 	def GUI(self, id_do_jogo):
 
 		id_do_estadio = self.estadio_do_jogo[id_do_jogo]
