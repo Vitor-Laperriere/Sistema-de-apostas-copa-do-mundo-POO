@@ -1,3 +1,4 @@
+# Classe que armazena informacoes de uma determinada aposta de um jogo
 class ApostaDoJogo:
 
     #   Construtor da classe ApostaDoJogo
