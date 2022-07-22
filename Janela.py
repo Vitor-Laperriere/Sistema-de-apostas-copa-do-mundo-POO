@@ -120,6 +120,7 @@ class Janela:
                 sg.Tab('Primeira rodada', tab[0]),
                 sg.Tab('Segunda Rodada', tab[1]),
                 sg.Tab('Terceira Rodada', tab[2])]])],
+            [sg.Text('', key='aviso_aposta', font='Verdana 10')],
             [sg.Button('Voltar', key='voltar3'), sg.Button('Apostar', key='apostar')]
         ]
 

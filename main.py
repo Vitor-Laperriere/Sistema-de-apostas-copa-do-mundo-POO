@@ -111,14 +111,23 @@ if __name__ == '__main__':
             if event == 'apostar':
 
                 # A lista de apostas eh atualizado
+                jogos_apostados = []
+
                 for i in range(6):
                     palpites = [values['aposta0' + str(i)], values['aposta1' + str(i)]]
                     valor_aposta = values['bet' + str(i)]
                     if (palpites[0].isdigit() and palpites[
                         1].isdigit() and valor_aposta.isdigit()):  # esse if impede que insira apostas inválidas
                         apostas[num_do_jogo].definir_aposta(palpites[0], palpites[1], valor_aposta)
+                        jogos_apostados.append(i+1)
+
 
                     num_do_jogo += 1
+
+
+                janela[2]['aviso_aposta'].update(f'Aposta alterada nos jogos {jogos_apostados}')
+
+
 
             # O sistema cria um recibo das apostas do usuario
             sistema.escreve_recibo(usuario, apostas)
