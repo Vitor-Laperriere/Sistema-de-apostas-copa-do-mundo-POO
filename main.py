@@ -201,3 +201,5 @@ if __name__ == '__main__':
         if window == janela[7] and event == 'voltarDoAviso3':
             janela[7].hide()
             janela[0].un_hide()
+
+
