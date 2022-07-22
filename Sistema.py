@@ -41,6 +41,14 @@ class Sistema:
 
         return False
 
+    def registro_valido(self,usuario):
+
+        if usuario.senha != '' and usuario.nome != '':
+            return True
+
+        else:
+            return False
+
     # Metodo que registra um usuario no banco de usuarios
     def registrar_usuario(self, usuario):
 

@@ -84,11 +84,23 @@ if __name__ == '__main__':
                 janela[1]['aviso_tabela'].update(f"Bem vindo, {usuario.nome}")
 
             # Caso onde o usuario esta se registrando
-            elif event == 'Registrar' and not sistema.usuario_registrado(usuario):
+            elif event == 'Registrar' and not sistema.usuario_registrado(usuario) and sistema.registro_valido(usuario):
                 #janela atualiza mostrando que o usuario foi registrado
                 janela[0]['aviso_registro'].update('Registro feito')
                 usuario.ind = int(time.time())
                 sistema.registrar_usuario(usuario)
+
+            # Caso onde o usuario esta se registrando e insere infos faltando
+            elif event == 'Registrar' and not sistema.usuario_registrado(usuario) and  not sistema.registro_valido(usuario):
+                #janela atualiza mostrando que o usuario foi registrado
+                if usuario.senha == '' and usuario.nome == '':
+                    janela[0]['aviso_registro'].update('Falta inserir a sua senha e usuario')
+                elif  usuario.senha == '':
+                    janela[0]['aviso_registro'].update('Falta inserir a sua senha')
+                elif  usuario.nome == '':
+                    janela[0]['aviso_registro'].update('Falta inserir o seu usuario')
+
+
 
             # Caso onde o usuario esta registrando um usuario ja existente
             elif event == 'Registrar' and sistema.usuario_registrado(usuario):
